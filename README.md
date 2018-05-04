@@ -29,7 +29,7 @@ Install the dependencies
 $ npm install
 ```
 
-And then run a test
+And then try a test run
 
 ```shell
 $ npm run dev
