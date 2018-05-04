@@ -6,7 +6,7 @@ Database module for Enforce Team - CanSat 2018
 
 ### Prerequisites
 
-You need to have a mysql server running on your local machine and need to create the tables present in ```enforce.db.sql```.
+You need to have a mysql server running on your local machine and need to create the tables present in [enforce.db.sql](enforce.db.sql).
 For the database configuration see [config.json](config.json)
 
 ### Installing
