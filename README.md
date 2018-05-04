@@ -35,7 +35,7 @@ And then try a test run
 $ npm run dev
 
 > enforce-mysql@0.7.0 dev /Path/to/project/enforce-mysql
->  export NODE_ENV=* || SET DEBUG=* && node test/test.js
+>  export DEBUG=* || SET DEBUG=* && node test/test.js
 
   enforce-database Booting Enforce Database System +0ms
   enforce-database Connecting to database... +123ms
