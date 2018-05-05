@@ -13,12 +13,12 @@ class BufferType {
 }
 
 const tables = Object.freeze({
-	humidity:"humidity",
-	temperature:"temperature",
-	position:"position",
+	humidity: "humidity",
+	temperature: "temperature",
+	position: "position",
 	pressure: "pressure",
-	orientation:"orientation",
-	missions:"missions"
+	orientation: "orientation",
+	missions: "missions"
 })
 
 
@@ -79,8 +79,11 @@ class DataBase {
 	insert(data) {
 		Object.keys(data).forEach(key => {
 			if (key in tables) {
-				if (data[key] instanceof Object) this._insert(key, data[key])
-				else this._insert(key, data)
+				if (data[key] instanceof Object) {
+					this._insert(key, data[key])
+				} else {
+					this._insert(key, Object.defineProperty({}, key, { value: data[key], enumerable: true, writable: true}))
+				}
 			}
 		})
 	}
@@ -116,7 +119,10 @@ class DataBase {
 			debug(`Inserting into ${table}...`)
 			con.query({
 					sql: `INSERT INTO ?? SET ?`,
-					values: [table, Object.assign({ missionID: this.mission, time: new Date().getTime()}, data)]
+					values: [table, Object.assign({
+						missionID: this.mission,
+						time: new Date().getTime()
+					}, data)]
 				},
 				(error) => {
 					if (error) return reject(`ERROR: ${error.message}`)
