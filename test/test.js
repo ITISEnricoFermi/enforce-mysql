@@ -7,13 +7,13 @@ const db = new DataBase()
 db.startMission()
 
 setInterval(() => {
-	db.insert({position: { latitude: 3, longitude: 32, altitude:64 }})
+	db.save({position: { latitude: 3, longitude: 32, altitude:64 }})
 }, 10000)
 
 setInterval(() => {
-	db.insert({pressure: 1000})
+	db.save({pressure: 1000})
 }, 8000)
 
 setInterval(() => {
-	db.insert({temperature: 45})
+	db.save({temperature: 45})
 }, 5000)

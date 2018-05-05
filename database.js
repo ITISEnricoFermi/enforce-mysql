@@ -77,7 +77,7 @@ class DataBase {
 		this.buffer.push(new BufferType(datatype, data))
 	}
 
-	insert(data) {
+	save(data) {
 		Object.keys(data).forEach(key => {
 			if (key in tables) {
 				if (data[key] instanceof Object) {
