@@ -29,16 +29,6 @@ const con = createConnection(Object.assign({
 	insecureAuth: true
 }, config))
 
-debug(`Connecting to database...`)
-con.connect(err => {
-	if (err) {
-		debug(`ERROR: ${err.message}`)
-		return debug(`Can't connect to msql`)
-	}
-	debug("Connected!")
-})
-
-
 /**
  * @description Database class, a wrapper for mysql methods
  */
@@ -51,6 +41,15 @@ class DataBase {
 		this.options = Object.assign({}, options)
 		if (!("loopInterval" in this.options)) this.options.loopInterval = 10
 		if (!("bufferLimit" in this.options)) this.options.bufferLimit = 80000
+
+		debug(`Connecting to database...`)
+		con.connect(err => {
+			if (err) {
+				debug(`ERROR: ${err.message}`)
+				return debug(`Can't connect to msql`)
+			}
+			debug("Connected!")
+		})
 
 		this.mission = this.options.missionPrefix || "enf"
 		this.buffer = []
@@ -84,7 +83,11 @@ class DataBase {
 				if (data[key] instanceof Object) {
 					this._insert(key, data[key])
 				} else {
-					this._insert(key, Object.defineProperty({}, key, { value: data[key], enumerable: true, writable: true}))
+					this._insert(key, Object.defineProperty({}, key, {
+						value: data[key],
+						enumerable: true,
+						writable: true
+					}))
 				}
 			}
 		})
