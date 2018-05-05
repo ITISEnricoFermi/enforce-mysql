@@ -142,7 +142,7 @@ class DataBase {
 	}
 }
 
-module.exports = () => new DataBase()
+module.exports = DataBase
 
 
 /**
