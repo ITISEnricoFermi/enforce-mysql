@@ -45,11 +45,12 @@ con.connect(err => {
 class DataBase {
 
 	/**
-	 * @param {{missionPrefix?: string, loopInterval?: number}} options
+	 * @param {{missionPrefix?: string, loopInterval?: number, bufferLimit?: number}} options
 	 */
 	constructor(options) {
 		this.options = Object.assign({}, options)
 		if (!("loopInterval" in this.options)) this.options.loopInterval = 10
+		if (!("bufferLimit" in this.options)) this.options.bufferLimit = 80000
 
 		this.mission = this.options.missionPrefix || "enf"
 		this.buffer = []
@@ -73,6 +74,7 @@ class DataBase {
 	 * @param {PositionData | number | OrientationData} data
 	 */
 	_insert(datatype, data) {
+		if (this.buffer.length > this.options.bufferLimit) return debug(`Buffer full :: data loss ::`)
 		this.buffer.push(new BufferType(datatype, data))
 	}
 
