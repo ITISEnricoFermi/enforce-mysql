@@ -59,9 +59,10 @@ class DataBase {
 	/**
 	 * @description To call before the start of every mission to generate the mission id
 	 */
-	startMission() {
+	startMission(missionID) {
 		let now = new Date().getTime().toString()
 		this.mission += now
+		if (missionID) this.mission = missionID
 		debug(`Starting mission: ${this.mission}`)
 		return this._insert("missions", {
 			time: now

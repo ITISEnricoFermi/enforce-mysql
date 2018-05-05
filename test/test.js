@@ -4,7 +4,7 @@ const DataBase = require("../database")
 debug(`Creating database...`)
 const db = new DataBase()
 
-db.startMission()
+db.startMission(new Date().getTime().toString())
 
 setInterval(() => {
 	db.save({position: { latitude: 3, longitude: 32, altitude:64 }})
@@ -15,5 +15,5 @@ setInterval(() => {
 }, 8000)
 
 setInterval(() => {
-	db.save({temperature: 45})
+	db.save({temperature: {temperature: 45, missionID: "abcdhello"}})
 }, 5000)
