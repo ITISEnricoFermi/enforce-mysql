@@ -2,7 +2,7 @@ const debug = require("debug")("enforce-database:test")
 const DataBase = require("../database")
 
 debug(`Creating database...`)
-const db = DataBase()
+const db = new DataBase()
 
 db.startMission()
 
