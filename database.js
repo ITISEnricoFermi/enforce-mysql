@@ -84,11 +84,19 @@ class DataBase {
 				if (data[key] instanceof Object) {
 					this._insert(key, data[key])
 				} else {
-					this._insert(key, Object.defineProperty({}, key, {
+					let obj = Object.defineProperty({}, key, {
 						value: data[key],
 						enumerable: true,
 						writable: true
-					}))
+					})
+					if ("missionID" in data) {
+						obj = Object.defineProperty(obj, "missionID", {
+							value: data.missionID,
+							enumerable: true,
+							writable: true
+						})
+					}
+					this._insert(key, obj)
 				}
 			}
 		})
