@@ -32,7 +32,7 @@ $ npm install
 And then try a test run
 
 ```shell
-$ npm run deb
+$ npm run dev
 
 > enforce-mysql@0.7.0 dev /Path/to/project/enforce-mysql
 >  export DEBUG=* || SET DEBUG=* && node test/test.js
