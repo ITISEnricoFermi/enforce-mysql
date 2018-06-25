@@ -1,7 +1,7 @@
 {
 	"host": "localhost",
-	"user": "enforce",
-	"password": "illuminati",
+	"user": "root",
+	"password": "Nuttertools0",
 	"database": "enforce-db",
 	"tables": {
 		"humidity": "humidity",

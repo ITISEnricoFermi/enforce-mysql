@@ -1,4 +1,5 @@
 const debug = require("debug")("enforce-database")
+const config = require(process.env.DB_ENFORCE_CONFIG || "./config.json")
 const {
 	createConnection
 } = require("mysql")
@@ -12,22 +13,12 @@ class BufferType {
 	}
 }
 
-const tables = Object.freeze({
-	humidity: "humidity",
-	temperature: "temperature",
-	position: "position",
-	pressure: "pressure",
-	orientation: "orientation",
-	missions: "missions"
-})
+const tables = Object.freeze(config.tables)
 
 
 debug("Booting %s", moduleName)
 
-const config = require(process.env.DB_ENFORCE_CONFIG || "./config.json")
-const con = createConnection(Object.assign({
-	insecureAuth: true
-}, config))
+let con = null
 
 /**
  * @description Database class, a wrapper for mysql methods
@@ -41,6 +32,10 @@ class DataBase {
 		this.options = Object.assign({}, options)
 		if (!("loopInterval" in this.options)) this.options.loopInterval = 10
 		if (!("bufferLimit" in this.options)) this.options.bufferLimit = 80000
+
+		con = createConnection(Object.assign({
+			insecureAuth: true
+		}, options))
 
 		debug(`Connecting to database...`)
 		con.connect(err => {
