@@ -29,7 +29,7 @@ class DataBase {
 	 * @param {{missionPrefix?: string, loopInterval?: number, bufferLimit?: number}} options
 	 */
 	constructor(options) {
-		this.options = Object.assign({}, options)
+		this.options = Object.assign({}, options, config)
 		if (!("loopInterval" in this.options)) this.options.loopInterval = 10
 		if (!("bufferLimit" in this.options)) this.options.bufferLimit = 80000
 
